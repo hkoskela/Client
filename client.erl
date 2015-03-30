@@ -2,7 +2,7 @@
 -define(SERVER_NODE, 'pi@192.168.2.102').
 -define(PROGRAM_TO_UPDATE, 'hello').
 -export([start/0,loop/0,update/0]).
--vsn(1.27).
+-vsn(1.28).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -37,7 +37,7 @@ loop() ->
 
     {ok,{client,[C]}} = beam_lib:version(client),
 	{ok,{hello,[L]}} = beam_lib:version(?PROGRAM_TO_UPDATE),
-	io:format("*** CLIENT (~p)*** sending version information to ?SERVER_NODE~n",[C]),
+	io:format("*** CLIENT (~p)*** sending version information to ~p~n",[C,?SERVER_NODE]),
     
 	{server,?SERVER_NODE} ! {self(), node(), beam_lib:version(?PROGRAM_TO_UPDATE), beam_lib:version(client)},
     receive
