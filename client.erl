@@ -2,7 +2,7 @@
 -define(SERVER_NODE, 'pi@192.168.2.102').
 -define(PROGRAM_TO_UPDATE, 'hello').
 -export([start/0,loop/0,update/0]).
--vsn(1.25).
+-vsn(1.26).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -50,7 +50,8 @@ loop() ->
 			ok
     after
        15000 ->
-            io:format("*** CLIENT (~p)*** no response~n",[C])
+            {server,?SERVER_NODE} ! {node(),"UpdateMe"},
+			io:format("*** CLIENT (~p)*** no response~n",[C])
     end,
     ?MODULE:update(),
 	timer:sleep(60000),
