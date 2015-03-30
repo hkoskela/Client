@@ -2,7 +2,7 @@
 -define(SERVER_NODE, 'pi@192.168.2.102').
 -define(PROGRAM_TO_UPDATE, 'hello').
 -export([start/0,loop/0,update/0]).
--vsn(1.21).
+-vsn(1.24).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -35,16 +35,16 @@ update() ->
 
 loop() ->
 
-    ?MODULE:update(),
-	{ok,{client,C}} = beam_lib:version(client),
+    {ok,{client,C}} = beam_lib:version(client),
 	{ok,{hello,[L]}} = beam_lib:version(?PROGRAM_TO_UPDATE),
 	io:format("*** CLIENT (~p)*** sending version information to SERVER~n",[C]),
     
-	{server,?SERVER_NODE} ! {self(), node(), beam_lib:version(?PROGRAM_TO_UPDATE)},
+	{server,?SERVER_NODE} ! {self(), node(), beam_lib:version(?PROGRAM_TO_UPDATE), beam_lib:version(client)},
     receive
-        {{ok,{hello,[V]}}} ->
+        {{ok,{hello,[V]}},{ok,{client,[Sc]}}} ->
 			io:format("***CLIENT (~p)***~n", [C]),
-		   	io:format("Local: ~p Server: ~p~n",[L,V]);
+		   	io:format("Hello.beam  Local: ~p Server: ~p~n",[L,V]),
+			io:format("Client.beam Local: ~p Server: ~p~n",[C,Sc]);
 		other ->
 			io:format("~p~n",[other]),
 			ok
@@ -52,6 +52,7 @@ loop() ->
        15000 ->
             io:format("*** CLIENT (~p)*** no response~n",[C])
     end,
-    timer:sleep(60000),
+    ?MODULE:update(),
+	timer:sleep(60000),
     ?MODULE:loop().
     
