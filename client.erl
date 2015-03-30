@@ -2,7 +2,7 @@
 -define(SERVER_NODE, 'pi@192.168.2.102').
 -define(PROGRAM_TO_UPDATE, 'hello').
 -export([start/0,loop/0,update/0]).
--vsn(1.32).
+-vsn(1.33).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
