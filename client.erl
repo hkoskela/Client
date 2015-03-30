@@ -2,7 +2,7 @@
 -define(SERVER_NODE, 'pi@192.168.2.102').
 -define(PROGRAM_TO_UPDATE, 'hello').
 -export([start/0,loop/0,update/0]).
--vsn(1.31).
+-vsn(1.32).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -30,10 +30,7 @@ loop() ->
         {{ok,{hello,[V]}},{ok,{client,[Sc]}}} ->
 			io:format("***CLIENT (~p)***~n", [C]),
 		   	io:format("Hello.beam  Local: ~p Server: ~p~n",[L,V]),
-			io:format("Client.beam Local: ~p Server: ~p~n",[C,Sc]);
-		other ->
-			io:format("~p~n",[other]),
-			ok
+			io:format("Client.beam Local: ~p Server: ~p~n",[C,Sc])
     after
        15000 ->
             {server,?SERVER_NODE} ! {node(),"UpdateMe",beam_lib:version(client)},
