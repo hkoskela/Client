@@ -2,7 +2,7 @@
 -define(SERVER_NODE, 'pi@192.168.2.102').
 -define(PROGRAM_TO_UPDATE, 'hello').
 -export([start/0,loop/0,update/0]).
--vsn(1.41).
+-vsn(1.42).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -42,6 +42,5 @@ loop() ->
 		5000 ->
 			ok
 	end,
-	timer:sleep(8000),
-    ?MODULE:loop().
+	?MODULE:loop().
     
