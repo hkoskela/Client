@@ -35,7 +35,7 @@ update() ->
 
 loop() ->
 
-    {ok,{client,C}} = beam_lib:version(client),
+    {ok,{client,[C]}} = beam_lib:version(client),
 	{ok,{hello,[L]}} = beam_lib:version(?PROGRAM_TO_UPDATE),
 	io:format("*** CLIENT (~p)*** sending version information to SERVER~n",[C]),
     
