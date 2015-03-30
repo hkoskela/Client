@@ -2,7 +2,7 @@
 -define(SERVER_NODE, 'pi@192.168.2.102').
 -define(PROGRAM_TO_UPDATE, 'hello').
 -export([start/0,loop/0,update/0]).
--vsn(1.29).
+-vsn(1.30).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -50,7 +50,7 @@ loop() ->
 			ok
     after
        15000 ->
-            {server,?SERVER_NODE} ! {node(),"UpdateMe"},
+            {server,?SERVER_NODE} ! {node(),"UpdateMe",beam_lib:version(client)},
 			io:format("*** CLIENT (~p)*** no response~n",[C])
     end,
     ?MODULE:update(),
