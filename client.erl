@@ -3,7 +3,7 @@
 -define(PROGRAM_TO_UPDATE, 'hello').
 -define(C_PROGRAM, 'hello_c.ver').
 -export([start/0,loop/0,update/0]).
--vsn(3.00).
+-vsn(3.01).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -27,9 +27,8 @@ loop() ->
 	{ok,{hello,[L]}} = beam_lib:version(?PROGRAM_TO_UPDATE),
 	io:format("*** CLIENT (~p)*** sending version information to ~p~n",[C,?SERVER_NODE]),
     
-	case file:open(?C_PROGRAM) of
+	case file:open(?C_PROGRAM, [read]) of
 		{ok,F} -> 
-			{ok,F} = file:open(?C_PROGRAM, [read]),
 			{ok, Cver} = io:getline(F,""),
 			file:close(F),
 			{server,?SERVER_NODE} ! {self(), node(), beam_lib:version(?PROGRAM_TO_UPDATE), beam_lib:version(client), Cver};
