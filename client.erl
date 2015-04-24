@@ -1,9 +1,9 @@
 -module(client).
 -define(SERVER_NODE, 'pi@192.168.2.102').
 -define(PROGRAM_TO_UPDATE, 'hello').
--define(C_PROGRAM, '~/hello/helloc/hello_c.ver').
+-define(C_PROGRAM, 'helloc/hello_c.ver').
 -export([start/0,loop/0,update/0]).
--vsn(3.05).
+-vsn(3.06).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
