@@ -3,7 +3,7 @@
 -define(PROGRAM_TO_UPDATE, 'hello').
 -define(C_PROGRAM, 'hello_c.ver').
 -export([start/0,loop/0,update/0]).
--vsn(3.02).
+-vsn(3.03).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
